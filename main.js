@@ -1,114 +1,181 @@
-[
+// MILESTONE 1
+// Partendo dalla struttura dati fornita, 
+// visualizzare in pagina un box per ogni icona, in cui è presente il nome dell’icona e l’icona stessa. 
+
+// MILESTONE 2
+// Ciascuna icona ha una proprietà “color”: 
+// utilizzare questa proprietà per visualizzare le icone del colore corrispondente. 
+
+// MILESTONE 3
+// Aggiungere alla pagina una select in cui le options corrispondono ai vari tipi di icone (animal, vegetable, user). 
+// Quando l’utente seleziona un tipo dalla select, visualizzare solamente le icone corrispondenti. 
+
+
+
+const icons = [
 	{
 		name: 'cat',
 		prefix: 'fa-',
 		type: 'animal',
 		family: 'fas',
-		color: 'orange'
+		color: 'blue'
 	},
 	{
 		name: 'crow',
 		prefix: 'fa-',
 		type: 'animal',
 		family: 'fas',
-		color: 'orange'
+		color: 'blue'
 	},
 	{
 		name: 'dog',
 		prefix: 'fa-',
 		type: 'animal',
 		family: 'fas',
-		color: 'orange'
+		color: 'blue'
 	},
 	{
 		name: 'dove',
 		prefix: 'fa-',
 		type: 'animal',
 		family: 'fas',
-		color: 'orange'
+		color: 'blue'
 	},
 	{
 		name: 'dragon',
 		prefix: 'fa-',
 		type: 'animal',
 		family: 'fas',
-		color: 'orange'
+		color: 'blue'
 	},
 	{
 		name: 'horse',
 		prefix: 'fa-',
 		type: 'animal',
 		family: 'fas',
-		color: 'orange'
+		color: 'blue'
 	},
 	{
 		name: 'hippo',
 		prefix: 'fa-',
 		type: 'animal',
 		family: 'fas',
-		color: 'orange'
+		color: 'blue'
 	},
 	{
 		name: 'fish',
 		prefix: 'fa-',
 		type: 'animal',
 		family: 'fas',
-		color: 'orange'
+		color: 'blue'
 	},
 	{
 		name: 'carrot',
 		prefix: 'fa-',
 		type: 'vegetable',
 		family: 'fas',
-		color: 'green'
+		color: 'orange'
 	},
 	{
 		name: 'apple-alt',
 		prefix: 'fa-',
 		type: 'vegetable',
 		family: 'fas',
-		color: 'green'
+		color: 'orange'
 	},
 	{
 		name: 'lemon',
 		prefix: 'fa-',
 		type: 'vegetable',
 		family: 'fas',
-		color: 'green'
+		color: 'orange'
 	},
 	{
 		name: 'pepper-hot',
 		prefix: 'fa-',
 		type: 'vegetable',
 		family: 'fas',
-		color: 'green'
+		color: 'orange'
 	},
 	{
 		name: 'user-astronaut',
 		prefix: 'fa-',
 		type: 'user',
 		family: 'fas',
-		color: 'blue'
+		color: 'purple'
 	},
 	{
 		name: 'user-graduate',
 		prefix: 'fa-',
 		type: 'user',
 		family: 'fas',
-		color: 'blue'
+		color: 'purple'
 	},
 	{
 		name: 'user-ninja',
 		prefix: 'fa-',
 		type: 'user',
 		family: 'fas',
-		color: 'blue'
+		color: 'purple'
 	},
 	{
 		name: 'user-secret',
 		prefix: 'fa-',
 		type: 'user',
 		family: 'fas',
-		color: 'blue'
+		color: 'purple'
 	}
 ];
+
+// contenitore icone
+const contenitore = document.getElementById('icons-container');
+
+
+// invoco funzione per farla funzionare
+disegnaIcone(contenitore, icons);
+
+const selezionato = document.getElementById('type-filter');
+
+// elemento selezionato al click cambia visualizzazione icone
+selezionato.addEventListener('change', function() {
+    
+    let selezione = this.value;
+
+    if (selezione == "") {
+        disegnaIcone(contenitore, icons);
+    } else {
+        
+        // elementi filtrati
+        const elementiFiltrati = icons.filter(icon => {
+
+        // se vero, allora entro all'interno dell'elemento che ho scelto
+        if(icon.type == selezione) {
+            return true;
+        }
+
+        return false;
+    });
+
+    // stampa icone selezionate
+    disegnaIcone(contenitore, elementiFiltrati);
+
+    }
+
+});
+
+
+// funzione per dcreazione le icone
+function disegnaIcone(contenitore, icons) {
+
+    let contenutoIcone = '';
+
+    icons.forEach(oggetto => {
+        contenutoIcone += `<div class="icon">
+                        <i style="color:${oggetto.color};" class="${oggetto.family} ${oggetto.prefix}${oggetto.name}"></i>
+                        <div class="icon-text">${oggetto.name}</div>
+                    </div>`;
+    });
+
+    contenitore.innerHTML = contenutoIcone;
+
+}
